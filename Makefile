@@ -20,6 +20,6 @@ inotify-extra:
 	cp inotify/* /tmp/inotify-extra/
 	chmod +x /tmp/inotify-extra/*
 	cd /tmp/inotify-extra && \
-	  fpm -s dir -t deb -n inotify-extra -v 0.1 --prefix /usr/bin/ .
+	  fpm -s dir -t deb -d inotify-tools -n inotify-extra -v 0.1.1 --prefix /usr/bin/ .
 	-cd /srv/reprepro/ubuntu && \
           reprepro includedeb openbrain /tmp/inotify-extra/inotify-extra_0.1_amd64.deb
