@@ -1,0 +1,5 @@
+chmod 755 -R /var/www/limesurvey
+chown www-data:www-data -R /var/www/limesurvey
+rm -rf /etc/nginx/sites-enabled/default
+
+/etc/init.d/nginx restart
