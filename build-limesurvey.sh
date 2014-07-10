@@ -14,12 +14,13 @@ cp limesurvey.zip /tmp/lime_install_root/var/www/
 
 (cd /tmp/lime_install_root/var/www/ && tar -xvzf limesurvey.zip && rm limesurvey.zip)
 
+cp limesurvey/postinst /tmp/limesurvey-postinst
 
 cd /tmp/lime_install_root
 
 fpm -s dir -t deb -n limesurvey -v 2.05.0.1 -d nginx -d pwgen -d 'mysql-server' -d 'php5-fpm' -d 'php5-mysql' \
     -d 'php5-gd' -d 'php5-ldap' -d 'php5-imap' \
-    -d 'nginx-bucket-64' --after-install ../limesurvey/postinst --prefix / .
+    -d 'nginx-bucket-64' --after-install ../limesurvey-postinst --prefix / .
 
 
 
