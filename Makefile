@@ -1,6 +1,6 @@
 now   := $(shell date +%Y%m%d%H%M)
 
-cibuild: nginx-bucket inotify-extra limesurvey
+cibuild: nginx-bucket inotify-extra limesurveypkg
 
 citest:
 
@@ -24,7 +24,7 @@ inotify-extra:
 	-cd /srv/reprepro/ubuntu && \
           reprepro includedeb openbrain /tmp/inotify-extra/inotify-extra_0.1_amd64.deb
 
-limesurvey: 
+limesurveypkg: 
 	./build-limesurvey.sh
 	-cd /srv/reprepro/ubuntu && \
           reprepro includedeb openbrain /tmp/lime_install_root/limesurvey_2.05.0.1_amd64.deb
