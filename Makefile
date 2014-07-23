@@ -1,6 +1,6 @@
 now   := $(shell date +%Y%m%d%H%M)
 
-cibuild: nginx-bucket inotify-extra limesurveypkg
+cibuild: nginx-bucket inotify-extra limesurveypkg nginx-gzip
 
 citest:
 
@@ -14,6 +14,15 @@ nginx-bucket:
 	-cd /srv/reprepro/ubuntu && \
           reprepro includedeb openbrain /tmp/nginx-bucket-64/nginx-bucket-64_0.1_amd64.deb
 
+nginx-gzip:
+	rm -rf /tmp/nginx-gzip
+	mkdir -p /tmp/nginx-gzip
+	cp nginx-gzip.conf /tmp/nginx-gzip/gzip.conf
+	cd /tmp/nginx-gzip && \
+	  fpm -s dir -t deb -n nginx-gzip -v 0.1 --prefix /etc/nginx/conf.d/ .
+	-cd /srv/reprepro/ubuntu && \
+          reprepro includedeb openbrain /tmp/nginx-gzip/nginx-gzip_0.1_amd64.deb
+
 inotify-extra:
 	rm -rf /tmp/inotify-extra
 	mkdir -p /tmp/inotify-extra
@@ -24,7 +33,7 @@ inotify-extra:
 	-cd /srv/reprepro/ubuntu && \
           reprepro includedeb openbrain /tmp/inotify-extra/inotify-extra_0.1_amd64.deb
 
-limesurveypkg: 
+limesurveypkg:
 	./build-limesurvey.sh
 	-cd /srv/reprepro/ubuntu && \
           reprepro includedeb openbrain /tmp/lime_install_root/limesurvey_2.05.0.1_amd64.deb
